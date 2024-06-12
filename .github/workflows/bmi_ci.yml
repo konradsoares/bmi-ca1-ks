@@ -2,7 +2,7 @@ name: BMI_CI                                        # "BMI_CI" workflow, name is
 
 env:
   AZURE_WEBAPP_NAME: gc-bmicalculator-ga            # set this to your application's name
-  AZURE_WEBAPP_PACKAGE_PATH: 'publish/myapp'        # set this to the path to your web app project
+  AZURE_WEBAPP_PACKAGE_PATH: 'publish'        # set this to the path to your web app project
 
 on:
  workflow_dispatch:        
@@ -33,7 +33,7 @@ jobs:
         reporter: 'dotnet-trx'                     
 
     - name: Publish
-      run: dotnet publish -c Release --property:PublishDir='${{ env.AZURE_WEBAPP_PACKAGE_PATH }}'
+      run: dotnet publish -c Release --property:PublishDir=publish
 
 # Deploy to Azure Web apps
     - name: Run Azure webapp deploy action using publish profile credentials
