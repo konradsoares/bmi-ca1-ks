@@ -2,7 +2,9 @@ name: BMI_CI                                        # "BMI_CI" workflow, name is
 
 env:
   AZURE_WEBAPP_NAME: gc-bmicalculator-ga            # set this to your application's name
+
   AZURE_WEBAPP_PACKAGE_PATH: 'publish/myapp'              # set this to the path to your web app project
+
 
 on:
  workflow_dispatch:        
@@ -14,7 +16,7 @@ jobs:
   build:                                            # "build" job
     runs-on: windows-latest                         # runner
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
@@ -33,7 +35,7 @@ jobs:
         reporter: 'dotnet-trx'                     
 
     - name: Publish
-      run: dotnet publish -c Release --property:PublishDir=${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+      run: dotnet publish -c Release --output=${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
 
 # Deploy to Azure Web apps
     - name: Run Azure webapp deploy action using publish profile credentials
@@ -42,4 +44,5 @@ jobs:
         app-name: ${{ env.AZURE_WEBAPP_NAME }}                        # your app name
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE  }} # Define secret variable in repository settings as per action documentation
         package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}'
+
 
