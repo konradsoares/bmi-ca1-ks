@@ -30,7 +30,8 @@ jobs:
       uses: dorny/test-reporter@v1
       with:
         artifact: ''
-        name: MS Tests                  
+        name: MS Tests 
+        token: ${{ secrets.GITHUBTOKEN }}                
         path: '**.trx'
         reporter: 'dotnet-trx'                     
 
