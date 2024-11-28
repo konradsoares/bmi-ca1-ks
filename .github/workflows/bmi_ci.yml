@@ -15,9 +15,7 @@ on:
 jobs:
   build:                                            # "build" job
     runs-on: windows-latest                         # runner
-    permissions:
-      contents: write
-      checks: write
+
     steps:
     - uses: actions/checkout@v4
     - name: Setup .NET
@@ -34,7 +32,6 @@ jobs:
       with:
         artifact: ''
         name: MS Tests 
-        token: ${{ secrets.GITHUBTOKEN }}                
         path: '**/*.trx'
         reporter: 'dotnet-trx'                     
 
