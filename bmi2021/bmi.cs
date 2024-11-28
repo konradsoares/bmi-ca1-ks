@@ -4,7 +4,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace BMICalculator
+namespace BMICalculator - CA1 - Konrad Soares
 {
     public enum BMICategory { Underweight, Normal, Overweight, Obese };
 
